@@ -1,0 +1,17 @@
+const express=require('express')
+const router=express.Router()
+const auth=require('../middleware/auth')
+const authAdmin=require('../middleware/authAdmin')
+const {getProducts,createProduct,updateProduct,deleteProducts,specificProduct,updateProduct2, getProductsByCategoryId}=require('../controllers/productCtrl')
+router.route('/product')
+    .get(getProducts)
+    .post(auth,authAdmin,createProduct)
+router.route('/product/:id')
+    .get(specificProduct)
+    .delete(auth,authAdmin,deleteProducts)
+    .patch(auth,authAdmin,updateProduct)
+    .put(auth,authAdmin,updateProduct2)
+router.route('/product/category/:id')
+    .get(getProductsByCategoryId)
+
+module.exports=router;
