@@ -11,7 +11,6 @@ const multer=require("multer")
 
 
 //MiddleWare
-app.use(express.static("./client/build"));
 app.use(express.json());
 
 app.use(cookieParser());
@@ -45,14 +44,6 @@ mongoose.connect(
     if (err) throw err;
     console.log("connect DB");
   });
-
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static('grocery/build'))
-  app.get('*',(req,res)=>{
-    res.sendFile(path.join(__dirname,'grocery','build','index.html'))
-  })
-}
-
 
 app.listen(Port,()=>{
   console.log("Server Running on Port 5000")
